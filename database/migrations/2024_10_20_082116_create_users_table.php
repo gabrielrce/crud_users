@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('lastname');
             $table->string('lastname2');
-            $table->string('person_type');
+            $table->enum('person_type', ['fisica', 'moral']);
             $table->string('business_name')->nullable();
             $table->string('curp')->nullable();
         });

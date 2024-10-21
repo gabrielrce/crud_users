@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group" id="curpGroup">
                             <label>CURP</label>
-                            <input type="text" name="curp" class="form-control" required>
+                            <input type="text" name="curp" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -88,7 +88,54 @@
             </div>
             
         </div>
-    </div> 
+    </div>
+    <div class="modal fade" id="userModalEdit" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="userEditForm" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title">Editar usuario</h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Tipo de persona</label>
+                            <select name="person_type" id="edit_person_type" class="form-control" required>
+                                <option value="fisica">Física</option>
+                                <option value="moral">Moral</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nombre</label>
+                            <input type="text" name="name" class="form-control" required id="edit_name">
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido paterno</label>
+                            <input type="text" name="lastname" class="form-control" required id="edit_lastname">
+                        </div>
+                        <div class="form-group">
+                            <label>Apellido materno</label>
+                            <input type="text" name="lastname2" class="form-control" required id="edit_lastname2">
+                        </div>
+                        <div class="form-group">
+                            <label>Razón Social</label>
+                            <input type="text" name="business_name" class="form-control" id="edit_business_name">
+                        </div>
+                        <div class="form-group" id="edit_curpGroup">
+                            <label>CURP</label>
+                            <input type="text" name="curp" class="form-control" id="edit_curp">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>  
     <script>
         var storeUrl = @json(route('users.store'));
     </script>

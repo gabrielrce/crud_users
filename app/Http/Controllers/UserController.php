@@ -51,7 +51,7 @@ class UserController extends Controller
         $users = User::paginate(5);
 
         return response()->json([
-            'success' => 'User created successfully.',
+            'success' => 'Usuario creado con éxito.',
             'users' => $users->items(),
             'links' => $users->links()->toHtml(),
         ]);
@@ -63,7 +63,30 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            'lastname2' => 'required',
+            'business_name' => 'nullable',
+            'person_type' => 'required|in:fisica,moral',
+            'curp' => 'nullable|required_if:person_type,fisica',
+        ]);
+        $request->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            'lastname2' => 'required',
+            'person_type' => 'required|in:fisica,moral',
+        ]);
+    
+        $user->update($validatedData);
+    
+        $users = User::paginate(5);
+
+        return response()->json([
+            'success' => 'Usuario actualizado con éxito',
+            'users' => $users->items(),
+            'links' => $users->links()->toHtml(),
+        ]);
     }
 
     /**

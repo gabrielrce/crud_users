@@ -24,12 +24,21 @@ $(document).ready(function() {
             contentType: false,
             success: function(response) {
                 $('#userModal').modal('hide');
-                swal(response.success, "", "success");
+                Swal.fire({
+                    title: response.success,
+                    icon: "success",
+                    confirmButtonText: "OK"
+                });
+
                 updateUserList();
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
-                swal("Hubo un error al cargar sus datos", "", "error");
+                Swal.fire({
+                    title: "Hubo un error al actualizar los datos del usuario",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
             }
         });
     });  
@@ -53,12 +62,21 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 $('#userModalEdit').modal('hide');
-                swal(response.success, "", "success");
+                Swal.fire({
+                    title: response.success,
+                    icon: "success",
+                    confirmButtonText: "OK"
+                });
+
                 updateUserList();
             },
             error: function(xhr) {
                 console.log(xhr.responseText);
-                swal("Hubo un error al actualizar los datos del usuario", "", "error");
+                Swal.fire({
+                    title: "Hubo un error al actualizar los datos del usuario",
+                    icon: "error",
+                    confirmButtonText: "OK"
+                });
             }
         });
     });
@@ -96,4 +114,31 @@ function openEditModal(user) {
     }
 
     $('#userModalEdit').modal('show');
+}
+
+function openDeleteModal(userId) {
+    Swal.fire({
+        title: "¿Estás seguro que deseas eliminar al usuario?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '/users/' + userId,
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    Swal.fire("Usuario eliminado correctamente", "", "success");
+                    updateUserList();
+                },
+                error: function(xhr) {
+                    Swal.fire("Hubo un error al eliminar el usuario", "", "error");
+                }
+            });
+        }
+    });
 }

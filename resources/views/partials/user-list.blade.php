@@ -15,7 +15,7 @@
                     curp: '{{ $user->curp }}'
                 })">Editar
             </button>
-            <button class="btn btn-sm btn-danger">Eliminar</button>
+            <button class="btn btn-sm btn-danger" onclick="openDeleteModal({{ $user->id }})">Eliminar</button>
         </td>
     </tr>
 @endforeach

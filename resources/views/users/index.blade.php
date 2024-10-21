@@ -14,7 +14,7 @@
 <body>
     <div class="container mt-5">
         <h1>Usuarios</h1>
-        <button class="btn btn-primary mb-1" data-toggle="modal" data-target="#userModal">Nuevo Cliente</button>
+        <button class="btn btn-success mb-1" data-toggle="modal" data-target="#userModal">Nuevo Cliente</button>
 
         <form action="{{ route('users.index') }}" method="GET" class="mb-4">
             <div class="input-group">
@@ -88,7 +88,7 @@
             </div>
             
         </div>
-    </div>
+    </div> 
     <script>
         var storeUrl = @json(route('users.store'));
     </script>
